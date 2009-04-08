@@ -26,6 +26,6 @@ class SignGuestbookServlet extends HttpServlet {
             pm.close();
         }
 
-        resp.sendRedirect("/lol.jsp");
+        resp.sendRedirect("/guestbook.jsp");
   }
 }
