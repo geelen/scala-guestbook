@@ -1,10 +1,12 @@
 <project>
     <property name="sdk.dir" location="/opt/appengine-java-sdk"/>
+    <property name="build.dir" location="war/WEB-INF/classes"/>
+    <property name="scala.home" location="/opt/local/share/scala"/>
 
     <import file="${sdk.dir}/config/user/ant-macros.xml"/>
 
     <path id="project.classpath">
-        <pathelement path="war/WEB-INF/classes"/>
+        <pathelement path="${build.dir}"/>
         <fileset dir="war/WEB-INF/lib">
             <include name="**/*.jar"/>
         </fileset>
@@ -13,7 +15,31 @@
         </fileset>
     </path>
 
-    <target name="copyjars" description="Copies the App Engine JARs to the WAR.">
+    <property name="sources.dir" value="src"/>
+    <target name="init">
+        <property name="scala-library.jar" value="${scala.home}/lib/scala-library.jar"/>
+        <path id="build.classpath">
+            <pathelement location="${scala-library.jar}"/>
+            <!--<pathelement location="${your.path}"   />-->
+            <pathelement location="${build.dir}"/>
+            <fileset dir="${sdk.dir}/lib">
+                <include name="**/*.jar"/>
+            </fileset>
+        </path>
+
+        <taskdef resource="scala/tools/ant/antlib.xml">
+            <classpath>
+                <pathelement location="${scala.home}/lib/scala-compiler.jar"/>
+                <pathelement location="${scala-library.jar}"/>
+            </classpath>
+        </taskdef>
+    </target>
+
+    <target name="clean" description="Deletes all output classes">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="copyjars" depends="init" description="Copies the App Engine JARs to the WAR.">
         <copy todir="war/WEB-INF/lib" flatten="true">
             <fileset dir="${sdk.dir}/lib/user">
                 <include name="**/*.jar"/>
@@ -23,16 +49,23 @@
 
     <target name="compile" depends="copyjars"
             description="Compiles Java source and copies other source files to the WAR.">
-        <mkdir dir="war/WEB-INF/classes"/>
-        <copy todir="war/WEB-INF/classes">
+        <mkdir dir="${build.dir}"/>
+        <copy todir="${build.dir}">
             <fileset dir="src">
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
         <javac srcdir="src"
-               destdir="war/WEB-INF/classes"
+               destdir="${build.dir}"
                classpathref="project.classpath"
                debug="on"/>
+        <scalac srcdir="src"
+                destdir="${build.dir}"
+                classpathref="build.classpath"
+                force="changed">
+            <include name="**/*.scala"/>
+        </scalac>
+
     </target>
 
     <target name="datanucleusenhance" depends="compile" description="Performs JDO enhancement on compiled data classes.">

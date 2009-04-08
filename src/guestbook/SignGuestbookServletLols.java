@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Logger;
 
-public class SignGuestbookServlet extends HttpServlet {
-    private static final Logger log = Logger.getLogger(SignGuestbookServlet.class.getName());
+public class SignGuestbookServletLols extends HttpServlet {
+    private static final Logger log = Logger.getLogger(SignGuestbookServletLols.class.getName());
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         UserService userService = UserServiceFactory.getUserService();
