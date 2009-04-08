@@ -4,6 +4,7 @@
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="guestbook.Greeting" %>
 <%@ page import="guestbook.PMF" %>
+<%@ page import="org.apache.taglibs.standard.functions.Functions" %>
 <%@ page import="javax.jdo.PersistenceManager" %>
 <%@ page import="java.util.List" %>
 
@@ -52,7 +53,7 @@
 <%
     }
 %>
-<blockquote><%= g.getContent() %>
+<blockquote><%= Functions.escapeXml(g.getContent()) %>
 </blockquote>
 <%
         }
