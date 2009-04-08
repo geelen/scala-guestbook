@@ -5,7 +5,7 @@ import _root_.javax.jdo.PersistenceManager
 import java.util.Date
 import _root_.javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
 import java.util.logging.Logger
-//
+
 //object SignGuestbookServlet {
 //  Logger log = Logger.getLogger(SignGuestbookServlet.getClass.getName);
 //}
@@ -26,6 +26,6 @@ class SignGuestbookServlet extends HttpServlet {
             pm.close();
         }
 
-        resp.sendRedirect("/guestbook.jsp");
+        resp.sendRedirect("/lol.jsp");
   }
 }
