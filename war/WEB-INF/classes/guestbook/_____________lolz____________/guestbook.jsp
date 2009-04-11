@@ -3,7 +3,7 @@
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page import="guestbook.Greeting" %>
-<%@ page import="guestbook.PMF" %>
+<%@ page import="guestbook._____________lolz____________.PMFLolz" %>
 <%@ page import="org.apache.taglibs.standard.functions.Functions" %>
 <%@ page import="javax.jdo.PersistenceManager" %>
 <%@ page import="java.util.List" %>
@@ -33,7 +33,7 @@
 %>
 
 <%
-    PersistenceManager pm = PMF.get().getPersistenceManager();
+    PersistenceManager pm = PMFLolz.get().getPersistenceManager();
     String query = "select from " + Greeting.class.getName() + " order by date desc";
     List<Greeting> greetings = (List<Greeting>) pm.newQuery(query).execute();
     if (greetings.isEmpty()) {
@@ -53,8 +53,7 @@
 <%
     }
 %>
-<blockquote><%= Functions.escapeXml(g.getContent()) %>
-</blockquote>
+<blockquote><%= Functions.escapeXml(g.getContent()) %></blockquote>
 <%
         }
     }

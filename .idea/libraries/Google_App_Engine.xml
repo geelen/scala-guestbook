@@ -36,7 +36,7 @@
       <root url="jar:///opt/google-appengine-docs-20090115.zip!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="file:///opt/appengine-java-sdk/src" />
+      <root url="file:///opt/appengine-java-sdk-1.2.0/src" />
     </SOURCES>
   </library>
 </component>

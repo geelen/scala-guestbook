@@ -3,6 +3,7 @@ package guestbook._____________lolz____________;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import guestbook.Greeting;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.HttpServlet;
@@ -11,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Logger;
-
-import guestbook.Greeting;
-import guestbook.PMF;
 
 public class SignGuestbookServletLols extends HttpServlet {
     private static final Logger log = Logger.getLogger(SignGuestbookServletLols.class.getName());
@@ -26,7 +24,7 @@ public class SignGuestbookServletLols extends HttpServlet {
         Date date = new Date();
         Greeting greeting = new Greeting(user, content, date);
 
-        PersistenceManager pm = PMF.get().getPersistenceManager();
+        PersistenceManager pm = PMFLolz.get().getPersistenceManager();
         try {
             pm.makePersistent(greeting);
         } finally {
